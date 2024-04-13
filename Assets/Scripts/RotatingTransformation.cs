@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class RotatingCube : MonoBehaviour
+public class RotatingTransformation : MonoBehaviour
 {
     [SerializeField] private float _speed;
     private void FixedUpdate()

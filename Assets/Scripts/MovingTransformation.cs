@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSphere : MonoBehaviour
+public class MovingTransformation : MonoBehaviour
 {
     private void FixedUpdate()
     {
