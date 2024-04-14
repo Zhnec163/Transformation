@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,8 +5,10 @@ using UnityEngine;
 public class Counter : MonoBehaviour
 {
     private ClickHandler _clickHandler;
-    private int _count;
+    private float _count;
     private bool _counterRun;
+    private float _timeStep = 0.5F;
+    private IEnumerator _currenCoroutine;
 
     private void Awake()
     {
@@ -20,7 +21,12 @@ public class Counter : MonoBehaviour
             
         if (_counterRun)
         {
-            StartCoroutine(IncrementCounter());
+            _currenCoroutine = IncrementCounter();
+            StartCoroutine(_currenCoroutine);
+        }
+        else
+        {
+            StopCoroutine(_currenCoroutine);
         }
     }   
     
@@ -28,12 +34,12 @@ public class Counter : MonoBehaviour
     {
         while (_counterRun)
         {
+            yield return new WaitForSeconds(_timeStep);
             _count++;
             Debug.Log(_count);
-            yield return null;
         }
     }
-    
+
     private void OnEnable()
     {
         _clickHandler.Click += ProcessClick;
