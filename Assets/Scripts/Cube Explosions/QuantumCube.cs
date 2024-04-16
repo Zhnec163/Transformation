@@ -16,6 +16,5 @@ public class QuantumCube : MonoBehaviour
     {
         _cubeDivider.Divide();
         _effectCreator.CreateAnExplosionEffect(transform.position);
-        Destroy(gameObject);
     }
 }
