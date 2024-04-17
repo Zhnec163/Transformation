@@ -15,11 +15,6 @@ public class EnemyMover : MonoBehaviour
         _direction = direction;
     }
 
-    public void SetDirection(Vector3 direction)
-    {
-        _direction = direction;
-    }
-
     private void Move()
     {
         transform.Translate(_direction * _speed * Time.deltaTime);

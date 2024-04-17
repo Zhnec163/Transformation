@@ -20,20 +20,20 @@ public class FissileCube : MonoBehaviour
         _effectCreator = GetComponent<EffectCreator>();
     }
 
-    public void ProcessClick()
-    {
-        Divide();
-    }
-
     public void Init(int divisionChance, Vector3 scale, Color color)
     {
         _divisionChance = divisionChance;
         transform.localScale = scale;
         
-        if (TryGetComponent<Renderer>(out Renderer renderer))
+        if (TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
         {
-            renderer.material.color = color;
+            meshRenderer.material.color = color;
         }
+    }
+    
+    public void ProcessClick()
+    {
+        Divide();
     }
 
     private void Divide()
@@ -65,10 +65,11 @@ public class FissileCube : MonoBehaviour
 
     private FissileCube InstantiateFissileCube()
     {
-        FissileCube fissileCube = Instantiate(this._fissileCube, transform.position, Quaternion.identity);
+        FissileCube fissileCube = Instantiate(_fissileCube, transform.position, Quaternion.identity);
         int chance = _divisionChance / _chanceDivider;
         Vector3 scale = transform.localScale / _scaleDivider;
-        fissileCube.Init(chance, scale, RandomHelper.GetRandomColor());
+        Color color = RandomHelper.GetRandomColor();
+        fissileCube.Init(chance, scale, color);
         return fissileCube;
     }
 }

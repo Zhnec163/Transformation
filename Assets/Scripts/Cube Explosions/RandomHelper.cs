@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RandomHelper : MonoBehaviour
 {
@@ -11,9 +11,11 @@ public class RandomHelper : MonoBehaviour
     
     public static Color GetRandomColor()
     {
-        int r = Random.Range(0, 255);
-        int g = Random.Range(0, 255);
-        int b = Random.Range(0, 255);
+        float minRangeColor = 0F;
+        float maxRangeColor = 255F;
+        float r = Random.Range(minRangeColor, maxRangeColor) / maxRangeColor;
+        float g = Random.Range(minRangeColor, maxRangeColor) / maxRangeColor;
+        float b = Random.Range(minRangeColor, maxRangeColor) / maxRangeColor;
         int alpha = 1;
         return new Color(r, g, b, alpha);
     }
