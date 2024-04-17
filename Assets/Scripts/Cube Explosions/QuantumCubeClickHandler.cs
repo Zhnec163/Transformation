@@ -9,14 +9,13 @@ public class QuantumCubeClickHandler : MonoBehaviour
     private void Update()
     {
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(_ray, out hit, Mathf.Infinity))
         {
-            RaycastHit hit;
-            
-            if (Physics.Raycast(_ray, out hit, Mathf.Infinity))
+            if (hit.transform.TryGetComponent<FissileCube>(out FissileCube fissileCube))
             {
-                hit.transform.GetComponent<QuantumCube>().ProcessClick();
+                fissileCube.ProcessClick();
             }
         }
     }
