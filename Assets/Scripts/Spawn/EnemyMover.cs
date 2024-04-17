@@ -4,15 +4,20 @@ public class EnemyMover : MonoBehaviour
 {
     private Vector3 _direction;
     private float _speed = 1F;
+    
+    private void Update()
+    {
+        Move();
+    }
 
-    public void SetDirection(Vector3 direction)
+    public void Init(Vector3 direction)
     {
         _direction = direction;
     }
 
-    private void Update()
+    public void SetDirection(Vector3 direction)
     {
-        Move();
+        _direction = direction;
     }
 
     private void Move()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Vector3 _direction;
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private EnemyMover _enemyMover;
     
     private int _timeStep = 2;
     private bool _isWork = true;
@@ -16,12 +16,13 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator GenerateEnemies()
     {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_timeStep);
+        
         while (_isWork)
         {
-            GameObject enemy = Instantiate(_enemy, transform.position, Quaternion.identity);
-            EnemyMover enemyMover = enemy.GetComponent<EnemyMover>();
-            enemyMover.SetDirection(_direction.normalized);
-            yield return new WaitForSeconds(_timeStep);
+            EnemyMover enemyMover = Instantiate(_enemyMover, transform.position, Quaternion.identity);
+            enemyMover.Init(_direction.normalized);
+            yield return waitForSeconds;
         }
     }
 }
