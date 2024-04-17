@@ -1,20 +1,21 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CubeDivider), typeof(EffectCreator))]
+[RequireComponent(typeof(EffectCreator))]
 public class QuantumCube : MonoBehaviour
 {
+    [SerializeField] private GameObject _cube;
+    
     private EffectCreator _effectCreator;
-    private CubeDivider _cubeDivider;
 
     private void Awake()
     {
-        _cubeDivider = GetComponent<CubeDivider>();
         _effectCreator = GetComponent<EffectCreator>();
     }
 
-    public void StartDivision()
+    public void ProcessClick()
     {
-        _cubeDivider.Divide();
+        Destroy(gameObject);
+        Instantiate(_cube, transform.position, Quaternion.identity);
         _effectCreator.CreateAnExplosionEffect(transform.position);
     }
 }

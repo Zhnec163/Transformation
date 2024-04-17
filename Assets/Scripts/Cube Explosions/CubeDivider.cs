@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,8 +7,9 @@ public class CubeDivider : MonoBehaviour
     [SerializeField] private int _scaleDivider = 2;
     [SerializeField] private int _chanceDivider = 2;      
     [SerializeField] private int _divisionChance = 100;
+    [SerializeField] private GameObject _cube;
 
-    public void Divide()
+    private void Start()
     {
         int minPercent = 0;
         int maxPercent = 100;
@@ -15,15 +17,11 @@ public class CubeDivider : MonoBehaviour
         
         if (randomValue < _divisionChance)
         {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject cube = Instantiate(_cube, transform.position, Quaternion.identity);
             SetRandomColor(cube.GetComponent<Renderer>().material);
-            cube.transform.position = transform.position;
             cube.transform.localScale = transform.localScale / _scaleDivider;
-            cube.AddComponent(typeof(Rigidbody));
-            cube.AddComponent(typeof(CubeDivider));
             CubeDivider cubeDivider = cube.GetComponent<CubeDivider>();
             cubeDivider._divisionChance /= _chanceDivider;
-            cubeDivider.Divide();
         }
     }
     

@@ -16,7 +16,7 @@ public class QuantumCubeClickHandler : MonoBehaviour
             
             if (Physics.Raycast(_ray, out hit, Mathf.Infinity))
             {
-                hit.transform.GetComponent<QuantumCube>().StartDivision();
+                hit.transform.GetComponent<QuantumCube>().ProcessClick();
             }
         }
     }
